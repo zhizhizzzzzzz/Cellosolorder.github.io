@@ -335,6 +335,7 @@ cd /etc/yourname/documentserver
 &emsp;&emsp;可以安装等操作
 ```shell
 apt install vim
+```
 &emsp;&emsp;或者编辑配置修改文件等
 
 &emsp;&emsp;另存为新的镜像   
