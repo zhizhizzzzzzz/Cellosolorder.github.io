@@ -4,6 +4,45 @@
 ### 1. 用小白的脚本下了vscode，和ros2
 
 &emsp;&emsp;（密钥老了的话，curl一下新密钥）
+
+***ROS2***
+```shell
+sudo add-apt-repository universe -y
+sudo apt update 
+sudo apt install -y locales software-properties-common curl
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+sudo sh -c 'echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y ros-humble-desktop 
+sudo apt install -y ros-dev-tools
+sudo apt install -y python3-colcon-common-extensions 
+sudo apt install -y python3-rosdep2 python3-flake8-docstrings python3-pip python3-pytest-cov 
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+sudo rosdep init 
+rosdep update
+```
+
+***VSCode***
+```shell
+sudo apt-get install wget gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+sudo apt install apt-transport-https
+sudo apt update
+sudo apt install code
+```
+***(万一密钥不对)***
 ```shell
 sudo apt update && sudo apt install curl -y
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg」
@@ -382,4 +421,45 @@ sudo docker exec -it 8cc3162f7b33 /bin/bash
 #### ~~<font color="red">6.0 抽象，开启可显示gui的新终端： 失败</font>~~
 ```shell
     docker run -d -v /etc/localtime:/etc/localtime:ro -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY -e GDK_SCALE -e GDK_DPI_SCALE  rn 
+```
+
+## 6月8日
+### 1.入门yolov8
+#### 1.在git下yolov8
+```shell
+git clone https://github.com/ultralytics/ultralytics.git
+
+```
+#### 2.安装依赖
+```shell
+pip install pyproject.toml
+```
+
+## 6月9日
+### 1.shotcut怎么提取帧
+
+>　输出里找JPEG（体积最小，建议，听说选别的格式会好似），改视频速度（以调整帧率），后导出
+
+## 6月10日
+### 1.小白说他labelme的官方脚本，比我那个没ai的高级多了：
+***labelme***
+```shell
+# python2
+# conda create --name=labelme python=2.7
+# source activate labelme
+# conda install -c conda-forge pyside2
+# conda install pyqt
+# pip install labelme
+# if you'd like to use the latest version. run below:
+# pip install git+https://github.com/wkentaro/labelme.git
+
+# python3
+conda create --name=labelme python=3.6
+source activate labelme
+# conda install -c conda-forge pyside2
+conda install pyqt
+# pip install pyqt5  # pyqt5 can be installed via pip on python3
+pip install labelme
+# or you can install everything by conda command
+# conda install labelme -c conda-forge
 ```
